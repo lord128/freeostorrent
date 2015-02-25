@@ -11,13 +11,19 @@ catch(PDOException $e) {
 	echo $e->getMessage();
 }
 
-//Si pas connecté OU si le membre n'est pas l'auteur du torrent ou l'admin (mumbly) : on ne permet pas l'édition 
+//Si pas connecté OU si le membre n'est pas l'auteur du torrent OU l'admin : on ne permet pas l'édition 
 if(!$user->is_logged_in()) {
         header('Location: '.SITEURL.'/login.php');
 }
 
-if($rowpost['postAuthor'] != $_SESSION['username'] && $_SESSION['username'] != 'mumbly') {
+if($rowpost['postAuthor'] != $_SESSION['username']) {
 	header('Location: '.SITEURL);
+}
+
+if(isset($_SESSION['userid'])) {
+        if($_SESSION['userid'] != 1) {
+                header('Location: '.SITEURL);
+        }
 }
 
 

@@ -2,9 +2,15 @@
 //include config
 require_once('../includes/config.php');
 
-//Si pas connecté OU si le membre n'est pas mumbly, pas de connexion à l'espace d'admin --> retour sur la page login
-if(!$user->is_logged_in() || $_SESSION['username'] != 'mumbly') {
+//Si pas connecté OU si le membre n'est pas admin, pas de connexion à l'espace d'admin --> retour sur la page login
+if(!$user->is_logged_in()) {
         header('Location: login.php');
+}
+
+if(isset($_SESSION['userid'])) {
+        if($_SESSION['userid'] != 1) {
+                header('Location: '.SITEURL);
+        }
 }
 
 //show message from add / edit page

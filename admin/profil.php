@@ -6,16 +6,16 @@ if(!$user->is_logged_in()) {
         header('Location: login.php');
 }
 
-
 if(!isset($_GET['membre'])) {
-	 header('Location: '.SITEURL.'/index.php');
+	 header('Location: '.SITEURL);
 }
 
-/*
-if($_GET['membre'] != $_SESSION['username']) {
-        header('Location: '.SITEURL.'/index.php');
+if(isset($_SESSION['userid'])) {
+	if($_GET['membre'] != $_SESSION['userid']) {
+        header('Location: '.SITEURL);
+	}
 }
-*/
+
 
 else {
 
@@ -145,7 +145,7 @@ for($i=1; $i<count($dChunks); $i++ ){
 		<br />
 
 		<?php
-		if($_SESSION['username'] == 'mumbly') {
+		if($_SESSION['userid'] == 1) {
 		?>
 	
 			<!-- Historique téléchargements -->

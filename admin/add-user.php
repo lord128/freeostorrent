@@ -2,13 +2,15 @@
 //include config
 require_once('../includes/config.php');
 
-//Si pas connecté en tant que mumbly, pas d'accès à la création de membre --> retour sur la page login
+//Si pas connecté OU si le membre n'est pas admin, pas de connexion à l'espace d'admin --> retour sur la page login
 if(!$user->is_logged_in()) {
         header('Location: login.php');
 }
 
-elseif($_SESSION['userid'] != 1) {
-        header('Location: '.SITEURL);
+if(isset($_SESSION['userid'])) {
+        if($_SESSION['userid'] != 1) {
+                header('Location: '.SITEURL);
+        }
 }
 
 // titre de la page
@@ -17,23 +19,45 @@ require('../includes/header.php');
 ?>
 
 <body>
+
 <div id="container">
-	<div id="header">
-    		<h1><a href="<?php echo SITEURL; ?>"><?php echo SITESLOGAN; ?></a></h1>
-        	<h2>Liberté, égalité, et le touti quanti</h2>
-        	<div class="clear"></div>
-    	</div>
-    	<div id="nav">
-    		<ul>
-        		<li><a href="index.php">Accueil</a></li>
-            	<li><a href="/admin">Admin</a></li>
-            	<li><a href="#">Contact</a></li>
-        	</ul>
-    	</div>
-    	<div id="body">
-		<div id="content">
-		
-		        <?php include('menu.php');?>
+
+        <?php
+                require('../includes/header-logo.php');
+                require('../includes/nav.php');
+        ?>
+
+        <div id="body">
+        <div id="content">
+
+<?php
+// fil d'ariane
+$def = "index";
+$dPath = $_SERVER['REQUEST_URI'];
+$dChunks = explode("/", $dPath);
+
+echo('<a class="dynNav" href="/">Accueil</a><span class="dynNav"> > </span>');
+for($i=1; $i<count($dChunks); $i++ ){
+        echo('<a class="dynNav" href="/');
+        for($j=1; $j<=$i; $j++ ){
+                echo($dChunks[$j]);
+                if($j!=count($dChunks)-1){ echo("/");}
+        }
+
+        if($i==count($dChunks)-1){
+                $prChunks = explode(".", $dChunks[$i]);
+                if ($prChunks[0] == $def) $prChunks[0] = "";
+                $prChunks[0] = $prChunks[0] . "</a>";
+        }
+        else $prChunks[0]=$dChunks[$i] . '</a><span class="dynNav"> > </span>';
+        echo('">');
+        echo(str_replace("_" , " " , $prChunks[0]));
+}
+?>
+<br /><br />
+
+
+        <?php include('menu.php');?>
 				<p><a href="users.php">Membres Admin Index</a></p>
 
 				<h2>Ajouter un membre</h2>

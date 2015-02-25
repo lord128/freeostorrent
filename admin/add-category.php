@@ -1,13 +1,15 @@
 <?php
 require('../includes/config.php');
 
-//Si pas connecté OU si le membre n'est pas mumbly, pas de connexion à l'espace d'admin --> retour sur la page login
-if(!$user->is_logged_in()) { 
-	header('Location: login.php');
+//Si pas connecté OU si le membre n'est pas admin, pas de connexion à l'espace d'admin --> retour sur la page login
+if(!$user->is_logged_in()) {
+        header('Location: login.php');
 }
 
-elseif($_SESSION['userid'] != 1) {
-        header('Location: '.SITEURL);
+if(isset($_SESSION['userid'])) {
+        if($_SESSION['userid'] != 1) {
+                header('Location: '.SITEURL);
+        }
 }
 
 // titre de la page
@@ -19,20 +21,43 @@ require('../includes/header.php');
 <body>
 
 <div id="container">
-	<div id="header">
-    		<h1><a href="<?php echo SITEURL; ?>"><?php echo SITESLOGAN; ?></a></h1>
-        	<h2>Liberté, égalité, et le touti quanti</h2>
-        	<div class="clear"></div>
-    </div>
 
-    <?php require('../includes/nav.php'); ?>
+        <?php
+                require('../includes/header-logo.php');
+                require('../includes/nav.php');
+        ?>
 
-</div>
+        <div id="body">
+        <div id="content">
 
-<div id="body">
+<?php
+// fil d'ariane
+$def = "index";
+$dPath = $_SERVER['REQUEST_URI'];
+$dChunks = explode("/", $dPath);
 
-		<div id="content">
-			<?php include('menu.php');?>
+echo('<a class="dynNav" href="/">Accueil</a><span class="dynNav"> > </span>');
+for($i=1; $i<count($dChunks); $i++ ){
+        echo('<a class="dynNav" href="/');
+        for($j=1; $j<=$i; $j++ ){
+                echo($dChunks[$j]);
+                if($j!=count($dChunks)-1){ echo("/");}
+        }
+
+        if($i==count($dChunks)-1){
+                $prChunks = explode(".", $dChunks[$i]);
+                if ($prChunks[0] == $def) $prChunks[0] = "";
+                $prChunks[0] = $prChunks[0] . "</a>";
+        }
+        else $prChunks[0]=$dChunks[$i] . '</a><span class="dynNav"> > </span>';
+        echo('">');
+        echo(str_replace("_" , " " , $prChunks[0]));
+}
+?>
+<br /><br />
+
+
+        <?php include('menu.php');?>
 
 			<p><a href="categories.php">Categories Index</a></p>
 			<h2>Ajouter une catégorie</h2>
