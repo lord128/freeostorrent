@@ -10,12 +10,6 @@ if(!isset($_GET['membre'])) {
 	 header('Location: '.SITEURL);
 }
 
-if(isset($_SESSION['userid'])) {
-	if($_GET['membre'] != $_SESSION['userid']) {
-        header('Location: '.SITEURL);
-	}
-}
-
 
 else {
 
