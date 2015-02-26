@@ -10,11 +10,11 @@
    <meta name="description" content="<?php echo SITEDESCRIPTION; ?>" />
    <link rel="icon" href="favicon.ico" />
    <link rel="author" href="mailto:<?php echo SITEMAIL; ?>" xml:lang="fr-FR" title="<?php echo SITEAUTHOR; ?>" />
-   <link rel="stylesheet" href="<?php echo SITEURL; ?>/style/normalize.css">
-   <link rel="stylesheet" href="<?php echo SITEURL; ?>/style/main.css">
+   <link rel="stylesheet" href="<?php echo SITEURL; ?>/style/normalize.css" />
+   <link rel="stylesheet" href="<?php echo SITEURL; ?>/style/main.css" />
    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-   <script language="javascript" src="<?php echo SITEURL; ?>/js/passwd.js"></script>
-   <script language="javascript">
+   <script type="text/javascript" language="javascript" src="<?php echo SITEURL; ?>/js/passwd.js"></script>
+   <script type="text/javascript" language="javascript">
 	jQuery(document).ready(function() {
 		$('#username').keyup(function(){$('#result').html(passwordStrength($('#password').val(),$('#username').val()))})
 		$('#password').keyup(function(){$('#result').html(passwordStrength($('#password').val(),$('#username').val()))})

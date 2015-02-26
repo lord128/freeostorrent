@@ -34,8 +34,7 @@ function makesize($bytes) {
     return number_format($bytes / 1099511627776, 2) . " To";
 }
 
-function get_elapsed_time($ts)
-{
+function get_elapsed_time($ts) {
   $mins = floor((time() - $ts) / 60);
   $hours = floor($mins / 60);
   $mins -= $hours * 60;
@@ -56,8 +55,7 @@ function get_elapsed_time($ts)
 }
 
 
-function buildTreeArray($files)
-{
+function buildTreeArray($files) {
     $ret = array();
 
     foreach ($files as $k => $v)
@@ -85,8 +83,7 @@ function buildTreeArray($files)
 }
 
 
-function outputTree($files, $indent=1)
-{
+function outputTree($files, $indent=1) {
     echo "<table style=\"font-size: 7pt; width: 100%;\"";
 
     foreach($files as $k=>$v)
@@ -278,8 +275,7 @@ function date_fr($format, $timestamp=false) {
 // ---------------------------------------------------------------------
 //  Générer un mot de passe aléatoire
 // ---------------------------------------------------------------------
-function fct_passwd( $chrs = "")
-{
+function fct_passwd( $chrs = "") {
    if( $chrs == "" ) $chrs = 10;
    $chaine = "";
 
@@ -369,6 +365,5 @@ function detect_city($ip) {
         }
 
     }
-
 
 ?>

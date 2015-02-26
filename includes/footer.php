@@ -28,8 +28,6 @@
 </p>
 </div>
 
-
-
 <div id="cl4" class="footer-col">
 <p>
 <h3 style="color: #E66000;">Besoin de seed</h3><hr style="color: #E66000; margin: -8px 0 15px 0;">
@@ -61,8 +59,6 @@
 	</ul>
 </p>
 </div>
-
-
 
 <!--
 <div id="cl5" class="footer-col">

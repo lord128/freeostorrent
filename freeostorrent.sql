@@ -10,15 +10,10 @@
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
-
---
--- Base de données: `freeostorrent`
---
 
 -- --------------------------------------------------------
 
@@ -31,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `blog_cats` (
   `catTitle` varchar(255) DEFAULT NULL,
   `catSlug` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`catID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=32 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Contenu de la table `blog_cats`
@@ -46,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `blog_licences` (
   `licenceTitle` varchar(255) NOT NULL,
   `licenceSlug` varchar(255) NOT NULL,
   PRIMARY KEY (`licenceID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Contenu de la table `blog_licences`
@@ -66,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `blog_members` (
   `memberDate` datetime NOT NULL,
   `avatar` varchar(255) NOT NULL,
   PRIMARY KEY (`memberID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=42 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Contenu de la table `blog_members`
@@ -86,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `blog_messages` (
   `messages_message` text NOT NULL,
   `messages_lu` enum('0','1') NOT NULL DEFAULT '0',
   PRIMARY KEY (`messages_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Contenu de la table `blog_messages`
@@ -103,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `blog_posts_comments` (
   `ctext` text NOT NULL,
   `cuser` varchar(25) NOT NULL,
   PRIMARY KEY (`cid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Contenu de la table `blog_posts_comments`
@@ -127,7 +122,7 @@ CREATE TABLE IF NOT EXISTS `blog_posts_seo` (
   `postImage` varchar(255) NOT NULL,
   `postViews` int(11) NOT NULL,
   PRIMARY KEY (`postID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=55 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Contenu de la table `blog_posts_seo`
@@ -142,7 +137,7 @@ CREATE TABLE IF NOT EXISTS `blog_post_cats` (
   `postID` int(11) DEFAULT NULL,
   `catID` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=275 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Contenu de la table `blog_post_cats`
@@ -157,7 +152,7 @@ CREATE TABLE IF NOT EXISTS `blog_post_licences` (
   `postID_BPL` int(11) NOT NULL,
   `licenceID_BPL` int(11) NOT NULL,
   PRIMARY KEY (`id_BPL`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=285 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Contenu de la table `blog_post_licences`
@@ -206,7 +201,7 @@ CREATE TABLE IF NOT EXISTS `xbt_announce_log` (
   `uid` int(11) NOT NULL,
   `mtime` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=771411 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Contenu de la table `xbt_announce_log`
@@ -256,7 +251,7 @@ INSERT INTO `xbt_config` (`name`, `value`) VALUES
 ('table_scrape_log', 'xbt_scrape_log'),
 ('table_users', 'xbt_users'),
 ('listen_ipa', '*'),
-('listen_port', 'xxxxx'),
+('listen_port', '54969'),
 ('anonymous_announce', '0'),
 ('auto_register', '0');
 
@@ -288,7 +283,7 @@ CREATE TABLE IF NOT EXISTS `xbt_files` (
   `ctime` int(11) NOT NULL,
   PRIMARY KEY (`fid`),
   UNIQUE KEY `info_hash` (`info_hash`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=55 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Contenu de la table `xbt_files`
@@ -329,7 +324,7 @@ CREATE TABLE IF NOT EXISTS `xbt_scrape_log` (
   `uid` int(11) NOT NULL,
   `mtime` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=123 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -345,7 +340,7 @@ CREATE TABLE IF NOT EXISTS `xbt_users` (
   `torrent_pass` char(32) CHARACTER SET latin1 NOT NULL,
   `torrent_pass_secret` bigint(20) unsigned NOT NULL,
   PRIMARY KEY (`uid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=42 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Contenu de la table `xbt_users`
