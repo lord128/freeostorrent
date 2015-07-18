@@ -11,6 +11,67 @@ if($row['postID'] == ''){
         exit;
 }
 
+/*
+//Si le torrent est à supprimer ...
+if(isset($_GET['supppost'])) {
+
+        // 1 - on supprime le fichier .torrent dans le répertoire /torrents
+        $stmt4 = $db->prepare('SELECT postID,postTorrent FROM blog_posts_seo WHERE postID = :postID') ;
+        $stmt4->execute(array(
+                ':postID' => $_GET['supppost']
+        ));
+        $efface = $stmt4->fetch();
+
+        $file = $REP_TORRENTS.$efface['postTorrent'];
+        if (file_exists($file)) {
+                unlink($file);
+        }
+
+        // 2 - on supprime le torrent dans la base
+        $stmt = $db->prepare('DELETE FROM blog_posts_seo WHERE postID = :postID') ;
+        $stmt->execute(array(
+                ':postID' => $_GET['supppost']
+        ));
+
+        // 3 - on supprime sa référence de catégorie
+        $stmt1 = $db->prepare('DELETE FROM blog_post_cats WHERE postID = :postID');
+        $stmt1->execute(array(
+                ':postID' => $_GET['supppost']
+        ));
+
+        // 4 - on supprime sa référence de licence
+        $stmt2 = $db->prepare('DELETE FROM blog_post_licences WHERE postID_BPL = :postID_BPL');
+        $stmt2->execute(array(
+                ':postID_BPL' => $_GET['supppost']
+        ));
+
+        // 5 - on supprime ses commentaires s'ils existent
+        $stmt22 = $db->prepare('SELECT cid_torrent FROM blog_posts_comments WHERE cid_torrent = :cid_torrent');
+        $stmt22->execute(array(
+                ':cid_torrent' => $_GET['supppost']
+        ));
+        $commentaire = $stmt22->fetch();
+
+        if(!empty($commentaire)) {
+                $stmtsupcomm = $db->prepare('DELETE FROM blog_posts_comments WHERE cid_torrent = :cid_torrent');
+                $stmtsupcomm->execute(array(
+                        ':cid_torrent' => $_GET['supppost']
+                ));
+        }
+
+        // 6 - enfin, on met le flag à "1" pour supprimer le fichier dans la tables xbt_files
+        $stmt3 = $db->prepare('UPDATE xbt_files SET flags = :flags WHERE fid = :fid') ;
+        $stmt3->execute(array(
+                ':flags' => '1',
+                ':fid' => $_GET['supppost']
+        ));
+
+	// On affiche le message de suppression
+        header('Location: torrents.php?supppost=supprime');
+        exit;
+
+}//fin de if isset $_GET['supppost']
+*/
 
 $pagetitle = $row['postTitle'];
 require('includes/header.php');
@@ -64,11 +125,15 @@ for($i=1; $i<count($dChunks); $i++ ){
 					echo '<div class="title"';
                                         	echo '<span style="font-size: 14pt; font-weight: bold;">'.$row['postTitle'].'</span>';
 
-						if(isset($_SESSION['username'])) {
-							if($row['postAuthor'] == $_SESSION['username'] || $_SESSION['username'] == 'mumbly') {
-                                        			echo '<a style="text-decoration: none; padding-left: 100px;" href="admin/edit-post.php?id='.stripslashes(htmlspecialchars($row['postID'])).'"><input type="button" class="button" value="Editer" /></a>';                           
+						if(isset($_SESSION['username']) && isset($_SESSION['userid'])) {
+							if(($row['postAuthor'] == $_SESSION['username']) || ($_SESSION['userid'] == 1)) {
+                                        			echo '<a style="text-decoration: none; padding-left: 100px;" href="admin/edit-post.php?id='.stripslashes(htmlspecialchars($row['postID'])).'"><input type="button" class="button" value="Editer" /></a>';
+					?>
+								<!-- <a style="text-decoration: none;" href="javascript:supppost('<?php echo $row['postID'];?>','<?php echo $row['postTitle'];?>')"><input type="button" class="button" value="Supp." /></a> -->
+					<?php
                                         		}
 						}
+
 
                                         	sscanf($row['postDate'], "%4s-%2s-%2s %2s:%2s:%2s", $annee, $mois, $jour, $heure, $minute, $seconde);
 					
@@ -87,9 +152,9 @@ for($i=1; $i<count($dChunks); $i++ ){
                                         		echo implode(" - ", $links);
 						echo '</span>';
 
-						echo '<div style="background-color: #FFFFCC; font-size: 10px;">';
-						echo '<span style="font-weight: bold;">Télécharger :</span> <a href="admin/download.php?id='.stripslashes(htmlspecialchars($row['postID'])).'"><img src="images/download.png" alt="" /></a> | ';
-							echo '<span style="font-weight: bold;">Taille :</span> '.makesize($row['postTaille']).' | ';
+						echo '<div class="viewpostcadre" style="background-color: #FFFFCC; font-size: 10px;">';
+						echo '<span style="font-weight: bold;">Télécharger :</span> <a href="admin/download.php?id='.stripslashes(htmlspecialchars($row['postID'])).'"><img src="images/download.png" alt="" /></a><br />';
+							echo '<span style="font-weight: bold;">Taille :</span> '.makesize($row['postTaille']).'<br />';
 
 						   	$filetorrent = $REP_TORRENTS.$row['postTorrent'];
 						   	
@@ -156,8 +221,9 @@ for($i=1; $i<count($dChunks); $i++ ){
 
 							}
 
-						   	echo '<span style="font-weight: bold;">Nb de fichiers :</span> '.$numfiles.' | ';
-							
+						   	echo '<span style="font-weight: bold;">Nb de fichiers :</span> '.$numfiles.'<br />';
+						
+	
 						   	$stmt3 = $db->prepare('SELECT * FROM blog_posts_seo,xbt_files WHERE blog_posts_seo.postID = :postID AND xbt_files.fid = blog_posts_seo.postID');
                                                    	$stmt3->execute(array(':postID' => $row['postID']));
                                                    	$xbt = $stmt3->fetch();
@@ -173,8 +239,8 @@ for($i=1; $i<count($dChunks); $i++ ){
                                                         $stmt333->execute(array(':postID' => $row['postID']));
                                                         $views = $stmt333->fetch();
 
-						   	echo '<span style="font-weight: bold;">T :</span> '.$xbt['completed'].' | ';
-							echo '<span style="font-weight: bold;">Lu : </span> '.$views['postViews'].' fois | ';
+						   	echo '<span style="font-weight: bold;">T :</span> '.$xbt['completed'].'<br />';
+							echo '<span style="font-weight: bold;">Lu : </span> '.$views['postViews'].' fois<br />';
 						   	echo '<span style="font-weight: bold;">Licence :</span> ';	
 	
 						   	$stmt3 = $db->prepare('SELECT licenceID,licenceTitle FROM blog_licences, blog_post_licences WHERE blog_licences.licenceID = blog_post_licences.licenceID_BPL AND blog_post_licences.postID_BPL = :postID_BPL ORDER BY licenceTitle ASC');
@@ -199,6 +265,34 @@ for($i=1; $i<count($dChunks); $i++ ){
 						    }
 							echo $row['postDesc'];
 							echo $row['postCont'];
+		
+							echo '<div style="background-color: #FFFFCC; font-size: 12px;">';
+								echo '<p><span style="font-weight: bold;">Fichiers du torrent :</span><br />';
+								//print_r($content);
+								//echo outputTree($content['info']);
+								//echo $content['info']['files']['0']['path']['0'];
+
+								if (isset($content['info']) && $content['info']) {
+									$thefile=$content['info'];
+									if (isset($thefile['length'])) {
+										$nbfilestorr = htmlspecialchars($thefile['name']);
+									}
+
+									elseif (isset($thefile['files'])) {
+										foreach($thefile['files'] as $singlefile) {
+											$nbfilestorr = htmlspecialchars(implode('/',$singlefile['path']));
+										}
+									}
+
+									else {
+										// rien
+									}
+								}
+
+								echo $nbfilestorr;								
+
+								echo '</p>';
+							echo '</div>';
 						echo '</p>';
 					?>
 

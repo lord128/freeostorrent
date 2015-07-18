@@ -57,7 +57,13 @@ require('../includes/header.php');
         </tr>
         <?php
                 try {
-                        $stmt = $db->query('SELECT catID, catTitle, catSlug FROM blog_cats ORDER BY catTitle ASC');
+			$pages = new Paginator('10','p');
+                        $stmt = $db->query('SELECT catID FROM blog_cats');
+			//pass number of records to
+			$pages->set_total($stmt->rowCount());
+
+			$stmt = $db->query('SELECT catID, catTitle, catSlug FROM blog_cats ORDER BY catTitle ASC '.$pages->get_limit());
+
                         while($row = $stmt->fetch()){
 
                                 echo '<tr>';
@@ -80,7 +86,11 @@ require('../includes/header.php');
         </table>
 
 	<br />
-	<a href="add-category.php" style="text-decoration: none;"><input type="button" class="button" value="Ajouter une catégorie" /></a>
+	<p style="text-align: right;"><a href="add-category.php" style="text-decoration: none;"><input type="button" class="button" value="Ajouter une catégorie" /></a></p>
+
+	<?php
+		echo $pages->page_links();
+	?>
 	</div>
         
 	<?php require('../sidebar.php'); ?>

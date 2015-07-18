@@ -71,7 +71,7 @@ if (is_readable(COUNTER)) include_once(COUNTER);
 		$nb = $stmtmess->rowCount();
 
 		if ($nb == 0) {
-			$error[] = 'Aucun message reconnu.';
+			$error[] = 'Ce message n\'existe pas...';
 		}
 		else {
 			// si le message a été trouvé, on l'affiche

@@ -7,16 +7,16 @@ require('../includes/config.php');
 //on détermine l'id du fichier
 $fid = htmlentities($_GET['id']);
 
-//on détermine l'id du membre
-$stmt = $db->prepare('SELECT * FROM blog_members WHERE username = :username');
-$stmt->execute(array(':username' => $_SESSION['username']));
-$row = $stmt->fetch();
-
-if(empty($row['memberID'])) {
-	$uid = 32; // Si pas de $_SESSION, ID du compte visiteur
+// Si une session membre est lancée, on détermine l'id du membre
+if(isset($_SESSION['username'])) {
+	$stmt = $db->prepare('SELECT * FROM blog_members WHERE username = :username');
+	$stmt->execute(array(':username' => $_SESSION['username']));
+	$row = $stmt->fetch();
+	$uid = $row['memberID'];
 }
 else {
-	$uid = $row['memberID'];
+	// s'il n'y a pas de session, c'est donc un visiteur avec l'id 32
+	$uid = 32;
 }
 
 /*

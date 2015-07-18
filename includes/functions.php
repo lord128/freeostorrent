@@ -34,7 +34,8 @@ function makesize($bytes) {
     return number_format($bytes / 1099511627776, 2) . " To";
 }
 
-function get_elapsed_time($ts) {
+function get_elapsed_time($ts)
+{
   $mins = floor((time() - $ts) / 60);
   $hours = floor($mins / 60);
   $mins -= $hours * 60;
@@ -55,7 +56,8 @@ function get_elapsed_time($ts) {
 }
 
 
-function buildTreeArray($files) {
+function buildTreeArray($files)
+{
     $ret = array();
 
     foreach ($files as $k => $v)
@@ -83,8 +85,9 @@ function buildTreeArray($files) {
 }
 
 
-function outputTree($files, $indent=1) {
-    echo "<table style=\"font-size: 7pt; width: 100%;\"";
+function outputTree($files, $indent=1)
+{
+    //echo "<table style=\"font-size: 7pt; width: 100%;\"";
 
     foreach($files as $k=>$v)
     {
@@ -118,7 +121,7 @@ function outputTree($files, $indent=1) {
             $ext=pathinfo($entry,PATHINFO_EXTENSION);
         }
 
-        echo "<tr><td style=\"border: 1px solid #D2D2D2;\">";
+       // echo "<tr><td style=\"border: 1px solid #D2D2D2;\">";
         echo $entry; // output folder name or filename
 
         if(!$is_folder)
@@ -127,7 +130,7 @@ function outputTree($files, $indent=1) {
             echo " (".makesize($size).")";
         }
 
-        echo "</td></tr>";
+        //echo "</td></tr>";
  
         if(is_array($v) && $is_folder)
         {
@@ -135,7 +138,7 @@ function outputTree($files, $indent=1) {
         }
     }
 
-    echo "</table>";
+    //echo "</table>";
 }
 
 
@@ -275,7 +278,8 @@ function date_fr($format, $timestamp=false) {
 // ---------------------------------------------------------------------
 //  Générer un mot de passe aléatoire
 // ---------------------------------------------------------------------
-function fct_passwd( $chrs = "") {
+function fct_passwd( $chrs = "")
+{
    if( $chrs == "" ) $chrs = 10;
    $chaine = "";
 
@@ -365,5 +369,6 @@ function detect_city($ip) {
         }
 
     }
+
 
 ?>

@@ -58,24 +58,33 @@ for($i=1; $i<count($dChunks); $i++ ){
         }
         ?>
 
+	<?php
+	/*
+	//On affiche le message de suppression
+	if(isset($_GET['supppost'])){
+		echo '<div class="alert-msg rnd8 success">Torrent '.htmlentities($_GET['supppost']).'.</div>';
+	}
+	*/
+	?>
+
         <table>
         <tr>
-                <th style="width: 250px;"><a style="color: #fff; text-decoration: none;" href="torrents.php?tri=postTitle&ordre=desc">&#x2191;</a>Nom<a style="color: #fff; text-decoration: none;" href="torrents.php?tri=postTitle&ordre=asc">&#x2193;</a></th>
-		<th style="width: 15px; text-align: center;"><a style="color: #fff; text-decoration: none;" href="torrents.php?tri=postViews&ordre=desc">&#x2191;</a>Lu<a style="color: #fff; text-decoration: none;" href="torrents.php?tri=postViews&ordre=asc">&#x2193;</a></th>
+                <th style="width: 220px;"><a style="color: #fff; text-decoration: none;" href="torrents.php?tri=postTitle&ordre=desc">&#x2191;</a>Nom<a style="color: #fff; text-decoration: none;" href="torrents.php?tri=postTitle&ordre=asc">&#x2193;</a></th>
+		<th style="text-align: center;"><a style="color: #fff; text-decoration: none;" href="torrents.php?tri=postViews&ordre=desc">&#x2191;</a>Lu<a style="color: #fff; text-decoration: none;" href="torrents.php?tri=postViews&ordre=asc">&#x2193;</a></th>
 		<th style="text-align: center;"></th>
 		<th style="text-align: center;"><a style="color: #fff; text-decoration: none;" href="torrents.php?tri=postTaille&ordre=desc">&#x2191;</a>Taille<a style="color: #fff; text-decoration: none;" href="torrents.php?tri=postTaille&ordre=asc">&#x2193;</a></th>
 		<th style="text-align: center;"><a style="color: #fff; text-decoration: none;" href="torrents.php?tri=postDate&ordre=desc">&#x2191;</a>Ajouté<a style="color: #fff; text-decoration: none;" href="torrents.php?tri=postDate&ordre=asc">&#x2193;</a></th>
 		<th style="text-align: center;"><a style="color: #fff; text-decoration: none;" href="torrents.php?tri=postAuthor&ordre=desc">&#x2191;</a>Par<a style="color: #fff; text-decoration: none;" href="torrents.php?tri=postAuthor&ordre=asc">&#x2193;</a></th>
 		<th style="text-align: center;">Catégorie</th>
 		<th style="text-align: center;">Licence</th>
-		<th style="width: 30px; text-align: center;"><a style="color: #fff; text-decoration: none;" href="torrents.php?tri=seeders&ordre=desc">&#x2191;</a>S<a style="color: #fff; text-decoration: none;" href="torrents.php?tri=seeders&ordre=asc">&#x2193;</a></th>
-		<th style="width: 30px; text-align: center;"><a style="color: #fff; text-decoration: none;" href="torrents.php?tri=leechers&ordre=desc">&#x2191;</a>L<a style="color: #fff; text-decoration: none;" href="torrents.php?tri=leechers&ordre=asc">&#x2193;</a></th>
-		<th style="width: 15px; text-align: center;"><a style="color: #fff; text-decoration: none;" href="torrents.php?tri=completed&ordre=desc">&#x2191;</a>T<a style="color: #fff; text-decoration: none;" href="torrents.php?tri=completed&ordre=asc">&#x2193;</a></th>
+		<th style="width: 35px; text-align: left;"><a style="color: #fff; text-decoration: none;" href="torrents.php?tri=seeders&ordre=desc">&#x2191;</a>S<a style="color: #fff; text-decoration: none;" href="torrents.php?tri=seeders&ordre=asc">&#x2193;</a></th>
+		<th style="width: 35px; text-align: left;"><a style="color: #fff; text-decoration: none;" href="torrents.php?tri=leechers&ordre=desc">&#x2191;</a>L<a style="color: #fff; text-decoration: none;" href="torrents.php?tri=leechers&ordre=asc">&#x2193;</a></th>
+		<th style="width: 20px; text-align: left;"><a style="color: #fff; text-decoration: none;" href="torrents.php?tri=completed&ordre=desc">&#x2191;</a>T<a style="color: #fff; text-decoration: none;" href="torrents.php?tri=completed&ordre=asc">&#x2193;</a></th>
         </tr>
         <?php
                 try {
 			// On affiche 15 torrents par page
-			$pages = new Paginator('10','p');
+			$pages = new Paginator('10','page');
 
 			$stmt = $db->query('SELECT postID FROM blog_posts_seo');
 			$pages->set_total($stmt->rowCount());
@@ -147,8 +156,8 @@ for($i=1; $i<count($dChunks); $i++ ){
                 	}
                 	echo '<td style="text-align: center; font-size: 8pt; line-height: 120%;">'.implode("<br />", $liclist).'</span></td>';
 
-			echo '<td style="text-align: center; color: green; font-size: 10pt;"><img src="images/up.png" alt="seeders" /> <a style="text-decoration: none;" href="peers.php?id='.$row['postID'].'&torrent='.$row['postTitle'].'">'.$xbt['seeders'].'</a></td>';
-			echo '<td style="text-align: center; color: red; font-size: 10pt;"><img src="images/down.png" alt="leechers" /> <a style="text-decoration: none;" href="peers.php?id='.$row['postID'].'&torrent='.$row['postTitle'].'">'.$xbt['leechers'].'</a></td>';
+			echo '<td style="text-align: left; color: green; font-size: 10pt;"><img src="images/up.png" alt="seeders" /> <a style="text-decoration: none;" href="peers.php?id='.$row['postID'].'&torrent='.$row['postTitle'].'">'.$xbt['seeders'].'</a></td>';
+			echo '<td style="text-align: left; color: red; font-size: 10pt;"><img src="images/down.png" alt="leechers" /> <a style="text-decoration: none;" href="peers.php?id='.$row['postID'].'&torrent='.$row['postTitle'].'">'.$xbt['leechers'].'</a></td>';
 			echo '<td style="text-align: center; font-size: 10pt;">'.$xbt['completed'].'</td>';
 			echo '</tr>';
                         }

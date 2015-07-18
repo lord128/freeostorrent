@@ -393,7 +393,6 @@ li ol, li ul {
         -webkit-border-radius: 0.5em;
 }
 
-
 #adminmenu {
 	padding-left: 0;
 }
@@ -431,7 +430,14 @@ li ol, li ul {
     text-decoration: none;
 }
 
-
+.viewpostcadre {
+	float: right;
+	border: 1px solid black;
+	padding: 5px;
+	margin-left: 25px;
+	display: inline-block;
+	vertical-align: top;
+}
 
 .sidebar {
 	width: 270px;
@@ -698,6 +704,6 @@ vertical-align: middle;
 
 #recherche{width:493px;margin-top:60px;float:right;color:#000;font-size:12px;margin-right: 15px;}
 #recherche .recherche{background:#fff;width:447px;height:31px;border-top-left-radius:5px;border-bottom-left-radius:5px;border:0px;float:left;text-indent:10px;font-size:16px;color:#000;}
-#recherche .valider{background:url(http://www.freeostorrent.fr/images/btn_recherche.gif);width:36px;height:41px;float:left;border:0px;cursor:pointer;}
+#recherche .valider{background:url(images/btn_recherche.gif);width:36px;height:41px;float:left;border:0px;cursor:pointer;}
 #recherche a{color:#000;text-decoration:none;}
 #recherche a:hover{color:#000;text-decoration:underline;}

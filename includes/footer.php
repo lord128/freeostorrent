@@ -28,6 +28,8 @@
 </p>
 </div>
 
+
+
 <div id="cl4" class="footer-col">
 <p>
 <h3 style="color: #E66000;">Besoin de seed</h3><hr style="color: #E66000; margin: -8px 0 15px 0;">
@@ -53,12 +55,12 @@
 <p>
 <h3 style="color: #E66000;">Liens web</h3><hr style="color: #E66000; margin: -8px 0 15px 0;">
 	<ul class="blocklist">
-		<li>&#187; <a style="text-decoration: none; color: #fff;" href="http://www.freetorrent.fr">freetorrent.fr : pour une culture Libre</a></li>
 		<li>&#187; <a style="text-decoration: none; color: #fff;" href="http://www.mumbly58.fr">mumbly58.fr : blog geek et Libre</a></li>
-		<li>&#187; <a style="text-decoration: none; color: #fff;" href="http://azote.org">azote.org : noms de domaine gratuits</a></li>
 	</ul>
 </p>
 </div>
+
+
 
 <!--
 <div id="cl5" class="footer-col">
@@ -78,8 +80,10 @@
 
 <div class="footer-width footer-bottom">
 	<p>Copyleft <span style="font-weight: bold;"><?php echo SITEURL; ?></span> | 2015 | 
+		<!--
 		<a href="http://zypopwebtemplates.com/">Free Web Templates</a> by ZyPOP | 
 		Noms de domaines gratuits <a href="http://azote.org">Azote.org</a> |
+		-->
 
 		<?php
 		/**

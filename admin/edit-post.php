@@ -11,20 +11,22 @@ catch(PDOException $e) {
 	echo $e->getMessage();
 }
 
-//Si pas connecté OU si le membre n'est pas l'auteur du torrent OU l'admin : on ne permet pas l'édition 
+//Si pas connecté : on renvoie sur page principale 
 if(!$user->is_logged_in()) {
         header('Location: '.SITEURL.'/login.php');
 }
 
-if($rowpost['postAuthor'] != $_SESSION['username']) {
-	header('Location: '.SITEURL);
-}
+//Si pas l'auteur du post : on renvoie sur page principale 
+//if($rowpost['postAuthor'] != $_SESSION['username']) {
+//	header('Location: '.SITEURL);
+//}
 
-if(isset($_SESSION['userid'])) {
-        if($_SESSION['userid'] != 1) {
-                header('Location: '.SITEURL);
-        }
-}
+
+// -----------------------------------------------------------------------------------------------
+// si c'est l'auteur du post ou si c'est l'admin, on donne les droits d'édition
+if(isset($_SESSION['username']) && isset($_SESSION['userid'])) {
+	if(($rowpost['postAuthor'] == $_SESSION['username']) || ($_SESSION['userid'] == 1)) {
+
 
 
 //Si on supprime l'icone de présentation
@@ -382,3 +384,12 @@ if(isset($_POST['submit'])) {
 </body>
 </html>
 
+
+<?php
+}
+}
+else {
+  header('Location: '.SITEURL);
+
+}
+?>

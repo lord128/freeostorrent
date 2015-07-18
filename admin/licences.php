@@ -57,7 +57,13 @@ require('../includes/header.php');
         </tr>
         <?php
                 try {
-                        $stmt = $db->query('SELECT licenceID, licenceTitle, licenceSlug FROM blog_licences ORDER BY licenceTitle ASC');
+			$pages = new Paginator('10','p');
+                        $stmt = $db->query('SELECT licenceID FROM blog_licences');
+			//pass number of records to
+			$pages->set_total($stmt->rowCount());
+
+			$stmt = $db->query('SELECT licenceID, licenceTitle, licenceSlug FROM blog_licences ORDER BY licenceTitle ASC '.$pages->get_limit());
+
                         while($row = $stmt->fetch()){
 
                                 echo '<tr>';
@@ -80,7 +86,11 @@ require('../includes/header.php');
         </table>
 
 	<br />
-	<a href="add-licence.php" style="text-decoration: none;"><input type="button" class="button" value="Ajouter une licence" /></a>
+	<p style="text-align: right;"><a href="add-licence.php" style="text-decoration: none;"><input type="button" class="button" value="Ajouter une licence" /></a></p>
+
+	<?php
+		echo $pages->page_links();
+	?>
 	</div>
         
 	<?php require('../sidebar.php'); ?>

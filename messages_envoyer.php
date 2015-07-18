@@ -82,7 +82,8 @@ if (isset($_POST['go']) && $_POST['go'] == 'Envoyer') {
 
 
 <?php
-$desti = $db->prepare ('SELECT username as nom_destinataire, memberID as id_destinataire FROM blog_members WHERE memberID <> :session ORDER BY username ASC');
+// on sélectionne tous les membres ... sauf le Visiteur (ID 32) ... et soi-même :)
+$desti = $db->prepare ('SELECT username as nom_destinataire, memberID as id_destinataire FROM blog_members WHERE memberID <> :session AND memberID != 32 ORDER BY username ASC');
 $desti->execute(array(
 	':session' => $_SESSION['userid']
 ));
@@ -92,17 +93,30 @@ $desti->execute(array(
 
 <form action="messages_envoyer.php" method="post">
 Pour : <div class="select">
-	  <select name="destinataire">
-		<?php
-		// on alimente le menu déroulant avec les login des différents membres du site
-		while ($data = $desti->fetch()) {
-			echo '<option value="'.$data['id_destinataire'].'">'.stripslashes(htmlentities(trim($data['nom_destinataire']))).'</option>';
-		}
-		?>
-	  </select>
-       </div>
 
-<br /><br />
+	 	<?php
+                if (isset($_GET['destuser']) && isset($_GET['destid']) && !empty($_GET['destuser']) && !empty($_GET['destid'])) {
+			echo '<select name="destinataire">';
+                        	echo '<option value="'.htmlentities($_GET['destid']).'">'.stripslashes(htmlentities(trim($_GET['destuser']))).'</option>';
+			echo '</select>';
+                }
+
+		else {
+	  		echo '<select name="destinataire">';
+			// on alimente le menu déroulant avec les login des différents membres du site
+			while ($data = $desti->fetch()) {
+				echo '<option value="'.$data['id_destinataire'].'">'.stripslashes(htmlentities(trim($data['nom_destinataire']))).'</option>';
+			}
+	  		echo '</select>';
+		}
+		?>	
+</div>
+
+<br />
+
+<a href="<?php echo SITEURL; ?>/recherche-membres.php">Rechercher un membre</a>
+<br />
+<br />
 
 Titre :<br />
 <input type="text" name="titre" size="50" value="<?php if (isset($_POST['titre'])) echo stripslashes(htmlentities(trim($_POST['titre']), ENT_QUOTES, "UTF-8")); ?>">

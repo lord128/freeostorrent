@@ -134,11 +134,16 @@ if(isset($_POST['submit'])) {
         		$error[] = "Ce torrent existe déjà dans la base.";
 		}
 
+		// On vérifie que l'url d'announce n'est pas vide
+		//if(empty($array['announce'])) {
+		//	$error[] = 'L\'url d\'announce est vide !';
+		//}
+
+
 		// on vérifie l'url d'announce	
 		if($array['announce'] != $ANNOUNCEURL) {
         		$error[] = 'Vous n\'avez pas fournit la bonne adresse d\'announce dans votre torrent : l\'url d\'announce doit etre '.$ANNOUNCEURL;
 		}
-
 
 		// si le nom du torrent n'a pas été fournit (facultatif), on récupère le nom public du fichier
     		if (empty($_POST['postTitle']))

@@ -54,8 +54,19 @@ if (is_readable(COUNTER)) include_once(COUNTER);
 			<?php echo $EDITO; ?>
 		</div>
 
+		<?php
+		/*
+		if ($user->is_logged_in()) {
+		?>
+				<div class="edito" style="text-align:center;">
+					<h3>>>> <a style="text-decoration: none;" href="admin/upload.php">Proposer un torrent</a> <<<</h3>
+				</div>
+		<?php
+		}
+		*/
+		?>
+		
 		<br />
-
 		<div><h2>Les derniers torrents</h2></div>
 
 	<?php
@@ -126,7 +137,8 @@ if (is_readable(COUNTER)) include_once(COUNTER);
 		$chaine = substr($chaine, 0, $espace).' ...';
 		}
 
-                 echo '<p style="text-align: justify;">'.$chaine.'<a style="text-decoration: none;" href="'.stripslashes(htmlspecialchars($row['postSlug'])).'"> <input type="button" class="button" value="Lire la suite ..." /></a></p>';
+                echo '<p style="text-align: justify;">'.$chaine.'</p>';
+		echo '<p style="text-align: right;"><a style="text-decoration: none;" href="'.stripslashes(htmlspecialchars($row['postSlug'])).'"> <input type="button" class="button" value="Lire la suite ..." /></a></p>';
 		 echo '</fieldset>';
              }
 

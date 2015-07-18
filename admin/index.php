@@ -72,6 +72,7 @@ if(isset($_GET['delpost'])) {
 
 }//fin de if isset $_GET['delpost']
 
+
 // titre de la page
 $pagetitle = 'Admin : gestion des torrents';
 require('../includes/header.php');
@@ -147,8 +148,8 @@ for($i=1; $i<count($dChunks); $i++ ){
                                 echo '<tr>';
                                 echo '<td style="width:55%;">'.$row['postTitle'].'</td>';
 				sscanf($row['postDate'], "%4s-%2s-%2s %2s:%2s:%2s", $annee, $mois, $jour, $heure, $minute, $seconde);
-				echo '<td style="font-size: 9px; text-align: center;">'.$jour.'-'.$mois.'-'.$annee.'</td>';
-				echo '<td style="font-size: 9px; text-align: center;"><a href="profil.php?membre='.$row['postAuthor'].'">'.$row['postAuthor'].'</a></td>';
+				echo '<td style="text-align: center;">'.$jour.'-'.$mois.'-'.$annee.'</td>';
+				echo '<td style="text-align: center;"><a href="profil.php?membre='.$row['postAuthor'].'">'.$row['postAuthor'].'</a></td>';
                                 ?>
 
                                 <td style="text-align: center;">

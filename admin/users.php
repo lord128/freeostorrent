@@ -98,11 +98,11 @@ require('../includes/header.php');
                                 echo '<tr>';
 				echo '<td>'.$row['memberID'].'</td>';
                                 echo '<td style="width: 20%;">'.$row['username'].'</td>';
-				echo '<td style="font-size: 9px;">'.$row['pid'].'</td>';
-                                echo '<td style="font-size: 9px;">'.$row['email'].'</td>';
+				echo '<td style="font-size: 10px;">'.$row['pid'].'</td>';
+                                echo '<td style="font-size: 11px;">'.$row['email'].'</td>';
 
 				sscanf($row['memberDate'], "%4s-%2s-%2s %2s:%2s:%2s", $annee, $mois, $jour, $heure, $minute, $seconde);
-				echo '<td style="font-size: 9px; text-align: center;">'.$jour.'-'.$mois.'-'.$annee.'</td>';
+				echo '<td style="font-size: 10px; text-align: center;">'.$jour.'-'.$mois.'-'.$annee.'</td>';
                                 ?>
 
                                 <td style="text-align: center;">

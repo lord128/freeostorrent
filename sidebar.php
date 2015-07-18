@@ -83,27 +83,6 @@
 </li>
 
 
-<!--
-<li>
-	<h4><span>Infos :</span></h4>
-	   <ul>
-		<li style="font-size: 8pt; font-weight: bold;">[21/01/15 - 19h15] Le site et le tracker piratix.fr.nf ont été désactivés. Merci de recharger tous les torrents depuis freeostorrent.fr.</li>
-		<li style="font-size: 8pt;"><img src="<?php echo SITEURL; ?>/images/up.png"> il n'est pas possible - pour le moment - de supprimer ses propres torrents. En cas de "problème" sur un torrent, merci de l'éditer et de rajouter [A SUPPRIMER] au début du titre.</li>
-	   </ul>
-</li>
--->
-
-<!--
-<li>
-           <ul>
-		 <form method="post" class="searchform" action="recherche.php" >
-                    <img src="<?php echo SITEURL; ?>/images/search.png" alt="search" /> <input type="text" size="19" placeholder="Rechercher un torrent" name="requete" class="s" />
-                    <input type="submit" class="searchsubmit formbutton" value="Go" />
-                 </form>		
-           </ul>
-</li>
--->
-
 <li>
                 <ul>
                         <li>

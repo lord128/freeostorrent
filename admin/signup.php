@@ -133,7 +133,7 @@ require('../includes/header.php');
 	} // captcha
 
 	else {
-    		$error[] = 'Mauvais code !';
+    		$error[] = 'Mauvais code captcha!';
 	}
 
         }

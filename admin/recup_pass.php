@@ -1,17 +1,6 @@
 <?php
 require('../includes/config.php');
 
-/*
-1 - on récupère $_POST['email'] rentré dans le questionnaire
-2 - on cherche à qui appartient cet e-mail dans la base sql
-3 - si on trouve, on calcule un nouveau mot de passe
-4 - on insert le nouveau mot de passe en sha1 dans la base sql
-5 - on envoie un e-mail avec le mot de passe non codé
-6 - on affiche un message de réussite
-7 - si on NE TROUVE PAS l'e-mail
-*/
-
-
 // Une fois le formulaire envoyé
 if(isset($_POST["recuperationpass"]))
 {
@@ -42,7 +31,7 @@ if(isset($_POST["recuperationpass"]))
 		//On crée le mail
 		$headers  = 'MIME-Version: 1.0' . "\r\n";
 		$headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
-		$headers .= 'From: Freeostorrent.fr <webmaster@freeostorrent.fr>'."\r\n";
+		$headers .= 'From: '.SITENAME.' <'.SITEMAIL.'>'."\r\n";
 		//$headers .= '\r\n';
 
 		$objet = 'Votre nouveau mot de passe sur '.SITEURL;
