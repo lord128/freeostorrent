@@ -74,14 +74,14 @@ for($i=1; $i<count($dChunks); $i++ ){
 		<?php
         	//On affiche le résultat de l'édition du profil
         	if(isset($_GET['action'])){
-                	echo '<div class="alert-msg rnd8 success">Profil mis à jour : '.htmlentities($_GET['action'], ENT_QUOTES, "UTF-8").' !</div>';
+                	echo '<div class="alert-msg rnd8 success">Votre profil a été mis à jour !</div>';
         	}
         ?>
 
 		<?php
                 //On affiche le résultat de l'envoi de message interne
                 if(isset($_GET['message'])){
-                        echo '<div class="alert-msg rnd8 success">Le message a bien été envoyé : '.htmlentities($_GET['message'], ENT_QUOTES, "UTF-8").' !</div>';
+                        echo '<div class="alert-msg rnd8 success">Le message a été envoyé !</div>';
                 }
         ?>
 
@@ -157,14 +157,12 @@ for($i=1; $i<count($dChunks); $i++ ){
                         <tr><td>Ratio de partage :</td><td><?php echo $ratio; ?></td></tr>
                 </table>
 
-		<br />
 
 		<!-- Historique téléchargements -->
 <table>
 	<tr><td colspan="6"><h3 id="historique">Ses Téléchargements :</h3></td></tr>
         <?php
 	$pages = new Paginator('5','d');
-	//$stmt = $db->query('SELECT postID FROM blog_posts_seo WHERE postAuthor = "'.$row['username'].'"');
 	$stmt = $db->prepare('SELECT fid FROM xbt_files_users WHERE uid = :uid');
 	$stmt->execute(array(
 		':uid' => $row['memberID']
@@ -208,9 +206,6 @@ for($i=1; $i<count($dChunks); $i++ ){
 
 		<?php
 		while($rowtorr = $stmtorr1->fetch()) {
-		//$tablerow = ++$i % 2 ? 'tableRow1':'tableRow2';
-		//$x++;
-                //$tablerow = ($x%2 == 0)? 'tableRow1': 'tableRow2';
 		?>	
 		<tr>
 			<td style="font-weight: bold;">
@@ -308,7 +303,6 @@ for($i=1; $i<count($dChunks); $i++ ){
 
 <?php
         echo '<div style="text-align: center;">';
-	//echo $pages->page_links('?membre='.$row['username'].'&');
 	echo $pages->page_links('?membre='.$row['username'].'&tri='.$tri.'&ordre='.$ordre.'&');
         echo '</div>';
 ?>
@@ -381,7 +375,6 @@ for($i=1; $i<count($dChunks); $i++ ){
 	<tr><td colspan="6"><h3 id="historique">Mes Téléchargements :</h3></td></tr>
         <?php
 	$pages = new Paginator('5','d');
-	//$stmt = $db->query('SELECT postID FROM blog_posts_seo WHERE postAuthor = "'.$row['username'].'"');
 	$stmt = $db->prepare('SELECT fid FROM xbt_files_users WHERE uid = :uid');
 	$stmt->execute(array(
 		':uid' => $row['memberID']
@@ -425,9 +418,6 @@ for($i=1; $i<count($dChunks); $i++ ){
 
 		<?php
 		while($rowtorr = $stmtorr1->fetch()) {
-		//$tablerow = ++$i % 2 ? 'tableRow1':'tableRow2';
-		//$x++;
-                //$tablerow = ($x%2 == 0)? 'tableRow1': 'tableRow2';
 		?>	
 		<tr>
 			<td style="font-weight: bold;">
@@ -449,12 +439,10 @@ for($i=1; $i<count($dChunks); $i++ ){
 
 <?php
 	echo '<div style="text-align: center;">';
-        	//echo $pages->page_links('?membre='.$row['username'].'&');
 		echo $pages->page_links('?membre='.$row['username'].'&tri='.$tri.'&ordre='.$ordre.'&');
         echo '</div>';
 ?>
 
-<br />
 
 
 <!-- Historique uploads -->
@@ -552,7 +540,7 @@ $stmt->execute(array(
 <table>
 	<tr>
 		<td colspan="5">
-			<h3 id="messages">Vos messages : 
+			<h3 id="messages">Mes Messages : 
 				<a style="text-decoration: none;" href="<?php echo SITEURL; ?>/messages_envoyer.php"><input type="button" class="button" value="Envoyer un message à un membre" /></a>
 			</h3>
 		</td>

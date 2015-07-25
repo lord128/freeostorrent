@@ -59,8 +59,8 @@ for($i=1; $i<count($dChunks); $i++ ){
 	<div style="text-align: center; border:1px ridge black;">
 		<h3>Rechercher un membre :</h3>
 		<form action="<?php echo SITEURL; ?>/recherche-membres.php" method="post" id="rechercher" name="rechercher">
-			<input type="text" alt="" name="requete" class="recherche" placeholder="Rechercher un membre ...">
-			<input type="submit" alt="" value="Rechercher" class="valider">
+			<input type="text" alt="" name="requete" class="s" placeholder="Rechercher un membre ...">
+			<input type="submit" alt="" value="Rechercher" class="searchsubmit formbutton">
 		</form>
 		<br />
 	</div>

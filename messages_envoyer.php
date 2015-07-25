@@ -122,7 +122,7 @@ Titre :<br />
 <input type="text" name="titre" size="50" value="<?php if (isset($_POST['titre'])) echo stripslashes(htmlentities(trim($_POST['titre']), ENT_QUOTES, "UTF-8")); ?>">
 <br /><br />
 Message : <textarea name="message"><?php if (isset($_POST['message'])) echo stripslashes(htmlentities(trim($_POST['message']), ENT_QUOTES, "UTF-8")); ?></textarea><br />
-<input type="submit" name="go" value="Envoyer">
+<input type="submit" class="searchsubmit formbutton" name="go" value="Envoyer"> <input type="reset" value="Annuler" />
 </form>
 
 <?php

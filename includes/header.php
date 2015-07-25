@@ -37,7 +37,8 @@
           });
     </script>
 
-    <!-- DELETE -->
+
+    <!-- Suppression d'un post (torrent) par son auteur ou l'Admin -->
     <script language="JavaScript" type="text/javascript">
 	function delpost(id, title) {
 		if (confirm("Etes-vous certain de vouloir supprimer '" + title + "'")) {
@@ -46,14 +47,7 @@
 	}
     </script>
 
-    <script language="JavaScript" type="text/javascript">
-        function supppost(id, title) {
-                if (confirm("Etes-vous certain de vouloir supprimer '" + title + "'")) {
-                        window.location.href = 'torrents.php?supppost=' + id;
-                }
-        }
-    </script>
-    
+    <!-- Suppression d'une caégorie par l'Admin -->
     <script language="JavaScript" type="text/javascript">
 	function delcat(id, title) {
 		if (confirm("Etes-vous certain de vouloir supprimer '" + title + "'")) {
@@ -62,6 +56,7 @@
 	}
     </script>
 
+    <!-- Suppression d'une licence par l'Admin -->
     <script language="JavaScript" type="text/javascript">
 	function dellicence(id, title) {
 		if (confirm("Etes-vous certain de vouloir supprimer '" + title + "'")) {
@@ -70,6 +65,7 @@
 	}
     </script>
 
+    <!-- Suppression d'un membre par l'Admin -->
     <script language="JavaScript" type="text/javascript">
 	function deluser(id, title) {
 		if (confirm("Etes-vous certain de vouloir supprimer '" + title + "'")) {
@@ -78,8 +74,16 @@
 	}
     </script>
 
+    <!-- Suppression de l'avatar du membre -->
+    <script language="JavaScript" type="text/javascript">
+        function delavatar(id, title) {
+                if (confirm("Etes-vous certain de vouloir supprimer '" + title + "'")) {
+                        window.location.href = 'edit-profil.php?delavatar=' + id + '&delname=' + title;
+                }
+        }
+    </script>
 
-    <!-- EDIT -->
+    <!-- Suppression de l'image du torrent -->
     <script language="JavaScript" type="text/javascript">
 	function delimage(id, title) {
 		if (confirm("Etes-vous certain de vouloir supprimer '" + title + "'")) {

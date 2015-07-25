@@ -10,9 +10,9 @@ session_start();
 
 //Identifiants SQL
 define('DBHOST','localhost');
-define('DBUSER','');
-define('DBPASS','');
-define('DBNAME','');
+define('DBUSER','freeostorrent');
+define('DBPASS','4U#qS=hXbN=X55Ni&HfGUBxA$D=Vz=!R');
+define('DBNAME','freeostorrent');
 
 //Connexion SQL
 $db = new PDO("mysql:host=".DBHOST.";port=8889;dbname=".DBNAME, DBUSER, DBPASS);
@@ -73,8 +73,8 @@ $REP_IMAGES_TORRENTS = '/var/www/freeostorrent.fr/web/images/imgtorrents/';
 $MAX_SIZE_AVATAR = 51200; // Taille max en octets du fichier (50 Ko)
 $WIDTH_MAX_AVATAR = 150; // Largeur max de l'image en pixels
 $HEIGHT_MAX_AVATAR = 150; // Hauteur max de l'image en pixels
-$REP_IMAGES_AVATARS = '/var/www/freeostorrent.fr/web/images/avatars/';
-$EXTENSIONS_VALIDES = array( 'jpg' , 'jpeg' , 'png' );
+$EXTENSIONS_VALIDES = array( 'jpg' , 'jpeg' , 'png' ); //extensions d'images valides
+$REP_IMAGES_AVATARS = '/var/www/freeostorrent.fr/web/images/avatars/'; // Répertoires des images avatar des membres
 
 
 // -----------------------------------------------------------------------------------

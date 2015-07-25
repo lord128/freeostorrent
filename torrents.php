@@ -54,17 +54,15 @@ for($i=1; $i<count($dChunks); $i++ ){
         <?php
         // On affiche : torrent ajouté ! 
         if(isset($_GET['action'])){
-                echo '<div class="alert-msg rnd8 success">Torrent ajouté : '.htmlentities($_GET['action']).' !</div>';
+                echo '<div class="alert-msg rnd8 success">Le torrent a été ajouté !</div>';
         }
         ?>
 
 	<?php
-	/*
 	//On affiche le message de suppression
-	if(isset($_GET['supppost'])){
-		echo '<div class="alert-msg rnd8 success">Torrent '.htmlentities($_GET['supppost']).'.</div>';
+	if(isset($_GET['delpost'])){
+		echo '<div class="alert-msg rnd8 success">Le torrent a été supprimé.</div>';
 	}
-	*/
 	?>
 
         <table>

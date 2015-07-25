@@ -145,7 +145,7 @@ Anti-spam : veuillez recopier le code ci-dessous<br />
 Message :<br />
 
 <textarea name="message"></textarea>
-<p><input name="submit" class="searchsubmit formbutton" type="submit" value="Envoyer le message"/></p>
+<p><input name="submit" class="searchsubmit formbutton" type="submit" value="Envoyer le message"/> <input type="reset" value="Annuler" /></p>
 </form>
 
 	</div>

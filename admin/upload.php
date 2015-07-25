@@ -354,7 +354,7 @@ if(isset($_POST['submit'])) {
 
                 </fieldset>
 
-                <p><input type='submit' class="searchsubmit formbutton" name='submit' value='Ajouter'></p>
+                <p><input type='submit' class="searchsubmit formbutton" name='submit' value='Ajouter'> <input type="reset" value="Annuler" /></p>
 
         </form>
 

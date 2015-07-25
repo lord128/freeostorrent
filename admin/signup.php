@@ -69,6 +69,11 @@ require('../includes/header.php');
 			}
 		}	
 
+		//Vérification simple de la validité de l'e-mail
+		if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+			$error[] = 'Cette adresse e-mail n\'est pas valide !';
+		}	
+
 		// On cherche si le pseudo fait moins de 4 caractères et s'il est déjà dans la base
                 if (strlen($_POST['username']) < 4) {
                 	$error[] = 'Le pseudo est trop court ! (4 caractères minimum)';
@@ -94,6 +99,9 @@ require('../includes/header.php');
                 if(!isset($error)){
                         $hashedpassword = $user->password_hash($_POST['password'], PASSWORD_BCRYPT);
 			$pid=md5(uniqid(rand(),true));
+
+			// Remove all illegal characters from an email address
+			$email = filter_var($email, FILTER_SANITIZE_EMAIL);
 
                         try {
                                 //On insert les données dans la table blog_members
@@ -133,7 +141,7 @@ require('../includes/header.php');
 	} // captcha
 
 	else {
-    		$error[] = 'Mauvais code captcha!';
+    		$error[] = 'Mauvais code anti-spam !';
 	}
 
         }
@@ -165,11 +173,11 @@ require('../includes/header.php');
                 <p><label>E-mail</label><br />
                 <input type='text' name='email' value='<?php if(isset($error)){ echo $_POST['email'];}?>'></p>
 
-		<p><label>Code captcha</label><br />
+		<p><label>Anti-spam : veuillez recopier le code ci-dessous</label><br />
    		<input type='text' name='captcha'>&nbsp;<img src="../verificationimage.php?<?php echo rand(0,9999);?>" alt="captcha" width="50" height="24" align="absbottom" />
 		</p>
 
-                <p><input type='submit' class="searchsubmit formbutton" name='submit' value='Créer un compte'></p>
+                <p><input type='submit' class="searchsubmit formbutton" name='submit' value='Créer un compte'> <input type="reset" value="Annuler" /></p>
 
         </form>
         </div>

@@ -1,24 +1,13 @@
 <?php
 require('includes/config.php');
 
-$stmt = $db->prepare('SELECT postID,postTitle,postSlug,postAuthor,postDesc,postCont,postTaille,postDate,postTorrent,postImage FROM blog_posts_seo WHERE postSlug = :postSlug');
-$stmt->execute(array(':postSlug' => $_GET['id']));
-$row = $stmt->fetch();
-
-//Si le post n'existe pas on redirige l'utilisateur
-if($row['postID'] == ''){
-        header('Location: ./');
-        exit;
-}
-
-/*
 //Si le torrent est à supprimer ...
-if(isset($_GET['supppost'])) {
+if(isset($_GET['delpost'])) {
 
-        // 1 - on supprime le fichier .torrent dans le répertoire /torrents
+       // 1 - on supprime le fichier .torrent dans le répertoire /torrents
         $stmt4 = $db->prepare('SELECT postID,postTorrent FROM blog_posts_seo WHERE postID = :postID') ;
         $stmt4->execute(array(
-                ':postID' => $_GET['supppost']
+                ':postID' => $_GET['delpost']
         ));
         $efface = $stmt4->fetch();
 
@@ -30,32 +19,32 @@ if(isset($_GET['supppost'])) {
         // 2 - on supprime le torrent dans la base
         $stmt = $db->prepare('DELETE FROM blog_posts_seo WHERE postID = :postID') ;
         $stmt->execute(array(
-                ':postID' => $_GET['supppost']
+                ':postID' => $_GET['delpost']
         ));
 
         // 3 - on supprime sa référence de catégorie
         $stmt1 = $db->prepare('DELETE FROM blog_post_cats WHERE postID = :postID');
         $stmt1->execute(array(
-                ':postID' => $_GET['supppost']
+                ':postID' => $_GET['delpost']
         ));
 
         // 4 - on supprime sa référence de licence
         $stmt2 = $db->prepare('DELETE FROM blog_post_licences WHERE postID_BPL = :postID_BPL');
         $stmt2->execute(array(
-                ':postID_BPL' => $_GET['supppost']
+                ':postID_BPL' => $_GET['delpost']
         ));
 
         // 5 - on supprime ses commentaires s'ils existent
         $stmt22 = $db->prepare('SELECT cid_torrent FROM blog_posts_comments WHERE cid_torrent = :cid_torrent');
         $stmt22->execute(array(
-                ':cid_torrent' => $_GET['supppost']
+                ':cid_torrent' => $_GET['delpost']
         ));
         $commentaire = $stmt22->fetch();
 
         if(!empty($commentaire)) {
                 $stmtsupcomm = $db->prepare('DELETE FROM blog_posts_comments WHERE cid_torrent = :cid_torrent');
                 $stmtsupcomm->execute(array(
-                        ':cid_torrent' => $_GET['supppost']
+                        ':cid_torrent' => $_GET['delpost']
                 ));
         }
 
@@ -63,15 +52,24 @@ if(isset($_GET['supppost'])) {
         $stmt3 = $db->prepare('UPDATE xbt_files SET flags = :flags WHERE fid = :fid') ;
         $stmt3->execute(array(
                 ':flags' => '1',
-                ':fid' => $_GET['supppost']
+                ':fid' => $_GET['delpost']
         ));
 
-	// On affiche le message de suppression
-        header('Location: torrents.php?supppost=supprime');
-        exit;
+        header('Location: torrents.php?action=supprime');
+        //exit;
 
-}//fin de if isset $_GET['supppost']
-*/
+}//fin de if isset $_GET['delpost']
+
+
+$stmt = $db->prepare('SELECT postID,postTitle,postSlug,postAuthor,postDesc,postCont,postTaille,postDate,postTorrent,postImage FROM blog_posts_seo WHERE postSlug = :postSlug');
+$stmt->execute(array(':postSlug' => $_GET['id']));
+$row = $stmt->fetch();
+
+//Si le post n'existe pas on redirige l'utilisateur
+if($row['postID'] == ''){
+        header('Location: ./');
+        exit;
+}
 
 $pagetitle = $row['postTitle'];
 require('includes/header.php');
@@ -129,7 +127,9 @@ for($i=1; $i<count($dChunks); $i++ ){
 							if(($row['postAuthor'] == $_SESSION['username']) || ($_SESSION['userid'] == 1)) {
                                         			echo '<a style="text-decoration: none; padding-left: 100px;" href="admin/edit-post.php?id='.stripslashes(htmlspecialchars($row['postID'])).'"><input type="button" class="button" value="Editer" /></a>';
 					?>
-								<!-- <a style="text-decoration: none;" href="javascript:supppost('<?php echo $row['postID'];?>','<?php echo $row['postTitle'];?>')"><input type="button" class="button" value="Supp." /></a> -->
+								<!-- 
+								<a style="text-decoration: none;" href="javascript:delpost('<?php echo $row['postID'];?>','<?php echo $row['postTitle'];?>')"><input type="button" class="button" value="Supp." /></a>	
+								-->
 					<?php
                                         		}
 						}

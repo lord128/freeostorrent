@@ -232,11 +232,10 @@ require('../includes/header.php');
 			if(!empty($row['avatar']) && file_exists($REP_IMAGES_AVATARS.$row['avatar'])) {
 				echo '<img style="max-width: 125px; max-height: 125px;" src="/images/avatars/'.$row['avatar'].'" alt="Avatar de '.$row['username'].'" />';
 			?>
-
-			<a href="javascript:delavatar('<?php echo $row['memberID'];?>','<?php echo $row['avatar'];?>')">Supprimer</a>
-
+				<a href="javascript:delavatar('<?php echo $row['memberID'];?>','<?php echo $row['avatar'];?>')">Supprimer</a>
 			<?php
 			}
+
 			else {
 				echo '<img style="width: 100px; height: 100px;" src="/images/noimage.png" alt="Pas d\'avatar pour '.$row['username'].'" />';
 			}
@@ -244,7 +243,7 @@ require('../includes/header.php');
 		</p>
 
 		<br />
-                <p><input type='submit' class="searchsubmit formbutton" name='submit' value='Mise à jour du profil membre'></p>
+                <p><input type='submit' class="searchsubmit formbutton" name='submit' value='Mettre à jour'> <input type="reset" value="Annuler" /></p>
 
         </form>
 	</div>
