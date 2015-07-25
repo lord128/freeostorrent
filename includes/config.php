@@ -10,9 +10,9 @@ session_start();
 
 //Identifiants SQL
 define('DBHOST','localhost');
-define('DBUSER','freeostorrent');
-define('DBPASS','4U#qS=hXbN=X55Ni&HfGUBxA$D=Vz=!R');
-define('DBNAME','freeostorrent');
+define('DBUSER','xxxxxxxxxxxxxxxxxxxxxxx');
+define('DBPASS','xxxxxxxxxxxxxxxxxxxxxxxxxxxx');
+define('DBNAME','xxxxxxxxxxxxxxxxxxxxxxxxx');
 
 //Connexion SQL
 $db = new PDO("mysql:host=".DBHOST.";port=8889;dbname=".DBNAME, DBUSER, DBPASS);
